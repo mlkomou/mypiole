@@ -1,0 +1,7 @@
+{
+  "name": "MyPiole",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
