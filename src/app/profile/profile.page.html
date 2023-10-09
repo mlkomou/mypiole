@@ -1,0 +1,63 @@
+
+<ion-content>
+  <div class="box flex" style="max-height: 350px">
+    <p>
+      <img style="max-height: 100px; max-width: 100px" src="./assets/imgs/user.png"> <br><br>
+      <span *ngIf="!isConnect">
+        {{ 'TXT.CONNECT' | translate }} <br><br>
+        <ion-row>
+          <ion-col size="6">
+            <ion-button (click)="signin()"  mode="ios" color="light" fill="outline" expand="block" >
+              <span style="text-transform: capitalize;">&nbsp;{{ 'TXT.CONN' | translate }}</span>
+            </ion-button>
+          </ion-col>
+          <ion-col size="6">
+            <ion-button (click)="signup()"  mode="ios" color="light" fill="outline" expand="block" >
+              <span style="text-transform: capitalize;">&nbsp;{{ 'TXT.INSCRP' | translate }}</span>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </span>
+      <span *ngIf="isConnect">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{user.username}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <ion-row>
+          <ion-col size="6">
+            <ion-button style="width: 120px" (click)="logout()"  mode="ios" color="light" fill="outline" expand="block" class="btn_2">
+              <span style="text-transform: capitalize;">&nbsp;{{ 'TXT.DECONN' | translate }}</span>
+            </ion-button>
+          </ion-col>
+          <ion-col size="6">
+            <ion-button style="width: 120px" (click)="signup()"  mode="ios" color="light" fill="outline" expand="block" class="btn_2">
+              <span style="text-transform: capitalize;">&nbsp;{{ 'TXT.COMPTE' | translate }}</span>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </span>
+    </p>
+  </div>
+  <br>
+  <ion-list lines="full" mode="ios">
+    <ion-item-group>
+      <ion-item-divider color="light">{{ 'TXT.ABOUT_YOU' | translate }}</ion-item-divider>
+      <ion-item (click)="goto('my-immo')">
+        <ion-label>{{ 'TXT.IMMO' | translate }}</ion-label>
+      </ion-item>
+    </ion-item-group>
+
+    <ion-item-group>
+      <ion-item-divider color="light">{{ 'TXT.ABOUT_US' | translate }}</ion-item-divider>
+      <ion-item (click)="goto('contactez-nous')">
+        <ion-label>{{ 'TXT.CONTACT' | translate }}</ion-label>
+      </ion-item>
+      <ion-item (click)="goto('apropos')">
+        <ion-label>{{ 'TXT.WHO' | translate }}</ion-label>
+      </ion-item>
+      <ion-item (click)="goto('condition')">
+        <ion-label>{{ 'TXT.COND' | translate }}</ion-label>
+      </ion-item>
+      <ion-item style="opacity: 0.3">
+        <ion-label>Version 1.3</ion-label>
+      </ion-item>
+    </ion-item-group>
+  </ion-list>
+</ion-content>

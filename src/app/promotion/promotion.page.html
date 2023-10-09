@@ -1,0 +1,82 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+      {{ 'TXT.SEARCH' | translate }}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <span mode="ios" style="border-radius: 10px">
+    <ion-card-content style="text-align: center; background-color: #2b6481; color: white" [innerHTML]="'TXT.NO_SEARCH' | translate">
+    </ion-card-content>
+  </span>
+
+
+  <div style="margin-top: 10%;">
+    <ion-list>
+      <ion-item>
+        <ion-label>{{textLoc}}</ion-label>
+        <ion-toggle checked="true" [(ngModel)]="isLoc" (ionChange)="isLocat()"></ion-toggle>
+      </ion-item>
+      <ion-button  mode="ios" (click)="searchCriteria('Type')" expand="block" fill="outline" class="btn">
+        <span style="" *ngIf="!noType">{{ type }}</span>
+        <span color="dark" *ngIf="noType" style="color: #222;">{{ type }}</span>
+        <ion-icon name="help-circle" slot="end" style="margin-right: -0%;"></ion-icon>
+      </ion-button>
+      <ion-button  mode="ios" (click)="searchCriteria('LocationVille')" expand="block" fill="outline" class="btn">
+        <span style="text-transform: capitalize;" *ngIf="!noLocatVille">{{ locatVille }}</span>
+        <span color="dark" *ngIf="noLocatVille" style="color: #222;">{{ locatVille }}</span>
+        <ion-icon name="pin" slot="end" style="margin-right: -0%;"></ion-icon>
+      </ion-button>
+      <ion-button  mode="ios" (click)="searchCriteria('LocationQtier')" expand="block" fill="outline" class="btn">
+        <span style="text-transform: capitalize;" *ngIf="!noLocat">{{ locat }}</span>
+        <span color="dark" *ngIf="noLocat" style="color: #222;">{{ locat }}</span>
+        <ion-icon name="pin" slot="end" style="margin-right: -0%;"></ion-icon>
+      </ion-button>
+      <!--<ion-button (click)="noSearch()"  mode="ios" color="secondary" expand="block" class="btn_2">-->
+      <!--<span>{{ 'MSG.PUTTYPEANDCITY' | translate }}</span>-->
+      <!--</ion-button>-->
+      <ion-button  mode="ios" (click)="searchImmo('Proposition')" color="secondary" expand="block" class="btn_2">
+        <ion-icon slot="start" name="search" style="zoom: 1.0; margin: 2%"></ion-icon>
+        <span style="text-transform: capitalize;">{{ 'SEARCH' | translate }}</span>
+      </ion-button>
+    </ion-list>
+  </div>
+  <!--<ion-list no-lines padding>-->
+  <!--<span *ngFor="let imte of imtes; let i = index">-->
+  <!--<ion-row (click)="goToDetail(imte)">-->
+  <!--<ion-col col-4>-->
+  <!--<img [src]="imte.images[0].path">-->
+  <!--</ion-col>-->
+  <!--<ion-col col-8>-->
+  <!--<ion-item text-wrap style="margin-top: -6%">-->
+  <!--<h2><ion-badge>{{imte.type}}</ion-badge></h2>-->
+  <!--<h2 style="color: #2b6481" *ngIf="imte.mode === 'Immo'">{{getPrice(imte.prix)}} {{imte.devise}} / {{ 'MONTH' | translate }}</h2>-->
+  <!--<h2 *ngIf="imte.mode === 'Terrain' || imte.mode === 'Hotel'">{{imte.titre}}</h2>-->
+  <!--<h2 style="color: #2b6481" *ngIf="imte.mode === 'Terrain'">{{getPrice(imte.prix)}} {{imte.devise}} / m<sup>2</sup></h2>-->
+  <!--<h2>{{imte.quartier.nom}} - {{imte.quartier.ville.nom}}</h2>-->
+  <!--<h2 *ngIf="imte.mode === 'Hotel'">{{getPrice(imte.prixMin)}} - {{getPrice(imte.prixMax)}} {{imte.devise}}</h2>-->
+  <!--<h2 *ngIf="(imte.type === 'Appartement' || imte.type === 'Maison') && imte.mode === 'Immo'">{{imte.pieces}} {{ 'ROOM' | translate }} &nbsp; {{imte.chambres}} {{ 'BEDROOM' | translate }}</h2>-->
+  <!--<p>-->
+  <!--<ion-row>-->
+  <!--<ion-col col-10> {{imte.since}} </ion-col>-->
+  <!--<ion-col col-2>-->
+  <!--<ion-icon *ngIf="!imte.isFavorite" style="zoom: 1.3;" slot="start" name="heart-fill=outline"></ion-icon>-->
+  <!--<ion-icon *ngIf="imte.isFavorite" style="zoom: 1.3;" slot="start" name="heart" color="secondary"></ion-icon>-->
+  <!--</ion-col>-->
+  <!--</ion-row>-->
+  <!--</p>-->
+  <!--</ion-item>-->
+  <!--</ion-col>-->
+  <!--</ion-row>-->
+  <!--<hr>-->
+  <!--</span>-->
+
+  <!--<span *ngIf="imtes.length === 0 && result && mode !== 'Hotel'" style="margin-top: 25px">-->
+  <!--<ion-card-content style="text-align: center">-->
+  <!--{{ 'MSG.RESULT_NOTHING' | translate }}-->
+  <!--</ion-card-content>-->
+  <!--</span>-->
+  <!--</ion-list>-->
+</ion-content>

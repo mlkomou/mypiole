@@ -1,0 +1,243 @@
+<ion-content *ngIf="type">
+  <span mode="ios" style="border-radius: 10px">
+      <ion-card-content style="text-align: center; background-color: #2b6481; color: white">
+        {{ 'MSG.ADD_IMMO' | translate }}
+      </ion-card-content>
+    </span>
+  <div class="ion-text-center" style="margin-top: 3%">
+    <span style="font-size: 12px">
+      {{ 'MSG.REQUIRED' | translate }} <br>
+      <!-- <strong>{{'MSG.COMM'}}</strong> -->
+    </span>
+  </div>
+
+  <form padding *ngIf="step_1 == true" [formGroup]="imteForm" (submit) = "step1(imteForm.value)" novalidate style="margin-top: 1%">
+    <ion-list>
+      <ion-item *ngIf="errorAdd != ''" text-wrap style="color: red; font-size: 12px">
+        {{errorAdd}}
+      </ion-item>
+      <ion-item *ngIf="showLocat">
+        <ion-label>{{textLoc}}</ion-label>
+        <ion-toggle checked="true" formControlName="isLoc" (ionChange)="isLocat()"></ion-toggle>
+      </ion-item>
+      <ion-item text-wrap>
+        <ion-label>{{ 'DEVISE' | translate }}</ion-label>
+
+        <ion-select mode="ios" formControlName="device" interface="action-sheet">
+          <ion-select-option  *ngFor="let d of devices" [value]="d.device">{{d.device}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item text-wrap *ngIf="show">
+        <ion-select mode="ios" formControlName="type" interface="action-sheet">
+          <ion-select-option  *ngFor="let typ of types" [value]="typ.value">{{typ.item}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item class="item">
+        <ion-input type="text" [placeholder]="plh_name" formControlName="titre"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="!prop && isImmo && show_1">
+        <ion-input type="number" [placeholder]="plh_price_month" formControlName="prix"></ion-input>
+        <ion-button type="ion-button" (click)="alertMsg('Prix/Mois')" fill="clear" item-end>
+          <ion-icon name="information-circle"></ion-icon>
+        </ion-button>
+      </ion-item>
+      <ion-item *ngIf="show_2 && is_meuble">
+        <ion-input type="number" [placeholder]="plh_price_hour_min" formControlName="surface"></ion-input>
+        <ion-button type="ion-button" (click)="alertMsg('Prix/Hr/Min')" fill="clear" item-end>
+          <ion-icon name="information-circle"></ion-icon>
+        </ion-button>
+      </ion-item>
+      <ion-item *ngIf="show_2 && is_meuble">
+        <ion-input type="number" [placeholder]="plh_price_hour_max" formControlName="surfaceMax"></ion-input>
+        <ion-button type="ion-button" (click)="alertMsg('Prix/Hr/Max')" fill="clear" item-end>
+          <ion-icon name="information-circle"></ion-icon>
+        </ion-button>
+      </ion-item>
+      <ion-item *ngIf="show_2">
+        <ion-input type="number" [placeholder]="plh_price_day_min" formControlName="prix"></ion-input>
+        <ion-button type="ion-button" (click)="alertMsg('Prix/Jr/Min')" fill="clear" item-end>
+          <ion-icon name="information-circle"></ion-icon>
+        </ion-button>
+      </ion-item>
+      <ion-item *ngIf="show_2">
+        <ion-input type="number" [placeholder]="plh_price_day_max" formControlName="prixMax"></ion-input>
+        <ion-button type="ion-button" (click)="alertMsg('Prix/Jr/Max')" fill="clear" item-end>
+          <ion-icon name="information-circle"></ion-icon>
+        </ion-button>
+      </ion-item>
+      <ion-item *ngIf="prop && isImmo && immo">
+        <ion-input type="number" [placeholder]="plh_price_month_min" formControlName="prix"></ion-input>
+        <ion-button type="ion-button" (click)="alertMsg('Prix/Jr/Min')" fill="clear" item-end>
+          <ion-icon name="information-circle"></ion-icon>
+        </ion-button>
+      </ion-item>
+      <ion-item *ngIf="prop && isImmo && immo">
+        <ion-input type="number" [placeholder]="plh_price_month_max" formControlName="prixMax"></ion-input>
+        <ion-button type="ion-button" (click)="alertMsg('Prix/Jr/Max')" fill="clear" item-end>
+          <ion-icon name="information-circle"></ion-icon>
+        </ion-button>
+      </ion-item>
+      <ion-item *ngIf="!isImmo && !prop">
+        <ion-input type="number" [placeholder]="plh_m" formControlName="prix"></ion-input>
+        <ion-button type="ion-button" (click)="alertMsg('Prix/M2')" fill="clear" item-end>
+          <ion-icon name="information-circle"></ion-icon>
+        </ion-button>
+      </ion-item>
+      <ion-item *ngIf="prop && !isImmo && immo">
+        <ion-input type="number" placeholder="M2 Minimum**" formControlName="surface"></ion-input>
+        <ion-button (click)="alertMsg('Surface')" fill="clear" item-end>
+          <ion-icon name="information-circle"></ion-icon>
+        </ion-button>
+      </ion-item>
+      <ion-item *ngIf="prop && !isImmo && immo">
+        <ion-input type="number" placeholder="M2 Maximum**" formControlName="surfaceMax"></ion-input>
+        <ion-button (click)="alertMsg('Surface')" fill="clear" item-end>
+          <ion-icon name="information-circle"></ion-icon>
+        </ion-button>
+      </ion-item>
+      <ion-item *ngIf="prop && !isImmo && immo">
+        <ion-input type="number" [placeholder]="plh_m_min" formControlName="prix"></ion-input>
+        <ion-button type="ion-button" (click)="alertMsg('Prix/M2/Min')" fill="clear" item-end>
+          <ion-icon name="information-circle"></ion-icon>
+        </ion-button>
+      </ion-item>
+      <ion-item *ngIf="prop && !isImmo && immo">
+        <ion-input type="number" [placeholder]="plh_m_max" formControlName="prixMax"></ion-input>
+        <ion-button type="ion-button" (click)="alertMsg('Prix/M2/Max')" fill="clear" item-end>
+          <ion-icon name="information-circle"></ion-icon>
+        </ion-button>
+      </ion-item>
+      <ion-item *ngIf="!show_2 && !prop">
+        <ion-input type="number" [placeholder]="plh_commission" formControlName="commission"></ion-input>
+        <ion-button type="ion-button" (click)="alertMsg('Commission')" fill="clear" item-end>
+          <ion-icon name="information-circle"></ion-icon>
+        </ion-button>
+      </ion-item>
+      <ion-item *ngIf="((isImmo && show_p) || !show) && !show_2">
+        <ion-input type="number" [placeholder]="plh_room" formControlName="pieces"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="((isImmo && show_p) || !show) && !show_2">
+        <ion-input type="number" [placeholder]="plh_debroom" formControlName="chambre"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="!prop && !isImmo">
+        <ion-input type="number" [placeholder]="plh_surface" formControlName="surface"></ion-input>
+        <ion-button (click)="alertMsg('Surface')" fill="clear" item-end>
+          <ion-icon name="information-circle"></ion-icon>
+        </ion-button>
+      </ion-item>
+      <ion-item>
+        <ion-row>
+          <ion-col size="7"></ion-col>
+          <ion-col size="5" class="center btn">
+            <ion-button class="sign-in" type="submit" full favourite round >
+              {{ 'NEXT' | translate }}&nbsp;<ion-icon slot="end" name="arrow-forward"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+    </ion-list>
+  </form>
+
+  <form padding *ngIf="step_1 == false" [formGroup]="imteForm_2" (submit) = "register(imteForm_2.value)" novalidate style="margin-top: 5%">
+    <ion-list>
+      <ion-item>
+        <ion-select (ionChange)="changePays()" interface="action-sheet" mode="ios" [placeholder]="plh_country" formControlName="pays">
+          <ion-select-option *ngFor="let c of countries" [value]="c.name">{{c.name}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item class="item">
+        <ion-searchbar [placeholder]="plh_city" formControlName="ville" (ionInput)="getItems($event)"></ion-searchbar>
+        <!--<ion-input type="text" [placeholder]="Ville*" formControlName="ville"></ion-input>-->
+      </ion-item>
+      <ion-list>
+        <ion-item mode="ios" *ngFor="let item of itemsV; let i = index" (click)="getVille(item.id, item.nom)">
+          <span *ngIf="i < 3">{{ item.nom }}</span>
+        </ion-item>
+      </ion-list>
+      <ion-item class="item">
+        <ion-searchbar (click)="loadQuartier();" [placeholder]="plh_quater" formControlName="quartier" (ionInput)="getItemsQ($event)"></ion-searchbar>
+        <!--<ion-input type="text" [placeholder]="Ville*" formControlName="ville"></ion-input>-->
+      </ion-item>
+      <ion-list>
+        <ion-item mode="ios" *ngFor="let item of itemsQ; let i = index" (click)="getQuartier(item.id, item.nom)">
+          <span *ngIf="i < 3">{{ item.nom }}</span>
+        </ion-item>
+      </ion-list>
+      <!--<ion-item>-->
+      <!--<ion-input type="text" [placeholder]="Lattitude" formControlName="lattitude"></ion-input>-->
+      <!--<ion-button type="ion-button" (click)="getCurrentPosition()" fill=clear item-end>-->
+      <!--<ion-icon name="pin"></ion-icon>-->
+      <!--</ion-button>-->
+      <!--</ion-item>-->
+      <!--<ion-item>-->
+      <!--<ion-input type="text" [placeholder]="Longitude" formControlName="longitude"></ion-input>-->
+      <!--</ion-item>-->
+      <ion-item class="item">
+        <ion-input type="text" [placeholder]="plh_tag" formControlName="tags" [(ngModel)]="tag" (keyup)="onKeyTags($event)"></ion-input>
+        <ion-button type="ion-button" (click)="alertMsg('Tags')" fill="clear" item-end>
+          <ion-icon name="information-circle"></ion-icon>
+        </ion-button>
+      </ion-item>
+      <ion-item text-wrap>
+        <ion-badge style="margin-left: 5%; font-size: 18px" *ngFor="let item of tags; let i = index" (click)="removeElt(i)">
+          {{item}} x
+        </ion-badge>
+      </ion-item>
+      <ion-item class="item">
+        <ion-textarea type="text" [placeholder]="plh_desc" formControlName="description"></ion-textarea>
+        <ion-button type="ion-button" (click)="alertMsg('Description')" fill="clear" item-end>
+          <ion-icon name="information-circle"></ion-icon>
+        </ion-button>
+      </ion-item>
+      <ion-item class="item" *ngIf="!prop">
+        <h5 margin-bottom="50">{{ 'PLH.DESC' | translate }} </h5>
+        <div *ngIf="medias.length != 0" margin-top="50">
+
+          <swiper>
+            <ng-template swiperSlide *ngFor="let m of medias; let i = index">
+              <div class="mainContent"  (click)="setCurrentMedia(m, i)">
+                <img style="max-height: 250px; width: 100%" [src]="m">
+              </div>
+            </ng-template>
+          </swiper>
+
+
+          <div padding *ngIf="currentMedia != null"
+               style="display: flex; flex-direction: row; align-items: center; justify-content: space-between">
+            <ion-button type="ion-button" fill="clear" (click)="deleteMedia()">
+              <ion-icon name="trash"></ion-icon>
+            </ion-button>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: row; align-items: center; justify-content: space-between">
+          <ion-button type="ion-button" color="primary" fill="clear" style="height: 100%; width: 40%" (click)="getPictureFromPhotoLibrary()">
+            <ion-icon name="images" style="zoom: 2;"></ion-icon>
+          </ion-button>
+
+          <ion-button type="ion-button" color="primary" fill="clear"  style="height: 100%; width: 40%" (click)="getPictureFromCamera()">
+            <ion-icon name="camera" style="zoom: 2;"></ion-icon>
+          </ion-button>
+        </div>
+        <div text-wrap style="color: red">
+          {{imagesRequired}}
+        </div>
+      </ion-item>
+      <ion-item>
+        <ion-row>
+          <ion-col size="5" class="center btn">
+            <ion-button type="ion-button" mode="ios" full favourite round (click)="back()">
+              <ion-icon name="arrow-back"></ion-icon>&nbsp;{{ 'PREVIOUS' | translate }}
+            </ion-button>
+          </ion-col>
+          <ion-col size="2"></ion-col>
+          <ion-col size="5" class="center btn">
+            <ion-button type="submit" mode="ios" full favourite round [disabled]="!imteForm_2.valid">
+              {{ 'REGISTER' | translate }}
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+    </ion-list>
+  </form>
+</ion-content>

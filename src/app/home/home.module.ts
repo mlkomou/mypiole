@@ -5,6 +5,9 @@ import { FormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
+import {LocalStorageProvider} from "../providers/local-storage/local-storage";
+import {TranslateModule} from "@ngx-translate/core";
+import {SwiperModule} from "swiper/angular";
 
 
 @NgModule({
@@ -12,8 +15,11 @@ import { HomePageRoutingModule } from './home-routing.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    HomePageRoutingModule
+    HomePageRoutingModule,
+    TranslateModule,
+    SwiperModule
   ],
+  providers: [LocalStorageProvider],
   declarations: [HomePage]
 })
 export class HomePageModule {}

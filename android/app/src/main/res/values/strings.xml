@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">MyPiole</string>
+    <string name="title_activity_main">MyPiole</string>
+    <string name="package_name">com.apps.mypiole</string>
+    <string name="custom_url_scheme">com.apps.mypiole</string>
+</resources>

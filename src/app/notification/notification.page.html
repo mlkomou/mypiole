@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+      {{ 'TXT.ALERT' | translate }}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="box flex" *ngIf="notifs.length === 0">
+    <p [innerHTML]="'TXT.NO_ALERT' | translate"> </p>
+  </div>
+  <div *ngIf="notifs.length > 0">
+    <ion-card *ngFor="let notif of notifs">
+      <ion-row>
+        <ion-col size="1">
+          <ion-icon name="notifications"></ion-icon>
+        </ion-col>
+        <ion-col size="11">
+          <h2>{{notif.title}}</h2>
+          <p>{{since(notif.tms)}}</p>
+        </ion-col>
+      </ion-row>
+      <ion-card-content>
+        <p>{{notif.description}}</p>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

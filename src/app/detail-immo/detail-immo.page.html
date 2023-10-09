@@ -1,0 +1,136 @@
+<ion-content>
+<!--  <ion-slides pager="true" mode="ios" style="height: 250px;" (swipe)="slideChanged($event)">-->
+<!--    <ion-slide *ngFor="let img of imte.images">-->
+<!--      <img style="max-height: 250px; width: 100%" [src]="img.path">-->
+<!--    </ion-slide>-->
+<!--  </ion-slides>-->
+  <ion-list style="margin-top: -3%;">
+    <ion-list-header>
+      <span item-start>{{page}}/{{imte.images.length}}</span>
+      <ion-icon (click)="share()" item-end ios="ios-share" md="md-share"></ion-icon>
+
+      <ion-icon *ngIf="isConnect" (click)="goToMsg('messages')" item-end ios="ios-chatbubbles"
+                md="md-chatbubbles"></ion-icon>
+      <ion-icon *ngIf="!isConnect" (click)="noAccess()" item-end ios="ios-chatbubbles" md="md-chatbubbles"></ion-icon>
+
+      <ion-icon (click)="addFavorite(imte)" *ngIf="!imte.isFavorite && isConnect" item-end slot="start"
+                name="heart-outline"></ion-icon>
+      <ion-icon (click)="rmFavorite(imte)" *ngIf="imte.isFavorite && isConnect" item-end slot="start" name="heart"
+                color="secondary"></ion-icon>
+      <ion-icon *ngIf="!isConnect" (click)="noAccess()" item-end slot="start" name="heart-outline"></ion-icon>
+      <ion-icon *ngIf="(user !== undefined && user !== null) && (user.user_id === imte.user.id)" (click)="deleteImte()"
+                item-end slot="start" name="trash" color="danger"></ion-icon>
+    </ion-list-header>
+    <hr>
+  </ion-list>
+  <ion-list style="margin-top: -3%;" no-lines>
+    <ion-item text-wrap>
+      <div item-start>
+        <!--        <span style="color: #2b6481" *ngIf="mode === 'Immo'">{{getPrice(imte.prix)}} {{imte.devise}} / {{ 'MONTH' | translate }}<br></span>-->
+        <span style="color: #2b6481"
+              *ngIf="imte.mode === 'Immo' && imte.location">{{getPrice(imte.prix)}} {{imte.devise}}
+          / {{ 'MONTH' | translate }}</span>
+        <span style="color: #2b6481"
+              *ngIf="imte.mode === 'Immo' && !imte.location">{{getPrice(imte.prix)}} {{imte.devise}}</span>
+        <span style="color: #2b6481" *ngIf="mode === 'Meuble'">{{ 'BETWEEN' | translate }} {{getPrice(imte.surfMin)}}
+          - {{getPrice(imte.surfMax)}} {{imte.devise}} / {{ 'HOUR' | translate }}<br></span>
+        <span style="color: #2b6481"
+              *ngIf="mode === 'Hotel' || mode === 'Meuble'">{{ 'BETWEEN' | translate }} {{getPrice(imte.prixMin)}}
+          - {{getPrice(imte.prixMax)}} {{imte.devise}} / {{ 'DAY' | translate }}<br></span>
+        <span style="color: #2b6481"
+              *ngIf="mode === 'Proposition' && (imte.type === 'Terrain' || imte.type === 'Espace Libre')">{{ 'BETWEEN' | translate }} {{getPrice(imte.prixMin)}}
+          - {{getPrice(imte.prixMax)}} {{imte.devise}} / m<sup>2</sup><br></span>
+        <span style="color: #2b6481"
+              *ngIf="mode === 'Proposition' && (imte.type === 'Chambre' || imte.type === 'Studio' || imte.type === 'Appartement' ||
+               imte.type === 'Maison' || imte.type === 'Co-Location' || imte.type === 'Bureau | Commerce')">{{ 'BETWEEN' | translate }} {{getPrice(imte.prixMin)}}
+          - {{getPrice(imte.prixMax)}} {{imte.devise}} / {{ 'MONTH' | translate }}<br></span>
+        <span style="color: #2b6481"
+              *ngIf="mode === 'Proposition' && (imte.type === 'Boutique' || imte.type === 'Fond De Commerce')">{{ 'BETWEEN' | translate }} {{getPrice(imte.prixMin)}}
+          - {{getPrice(imte.prixMax)}} {{imte.devise}} <br></span>
+        <span style="color: #2b6481" *ngIf="mode === 'Terrain'">{{getPrice(imte.prix)}} {{imte.devise}}
+          / m<sup>2</sup><br></span>
+        <span style="color: #2b6481" *ngIf="mode === 'Terrain'">Surface: {{imte.superficie}} m<sup>2</sup><br></span>
+        <span style="color: #2b6481"
+              *ngIf="mode === 'Proposition' && (imte.type === 'Terrain' || imte.type === 'Espace Libre')">Surface: {{ 'BETWEEN' | translate }} {{imte.surfMin}}
+          - {{imte.surfMax}} m<sup>2</sup></span>
+      </div>
+      <ion-badge item-end> {{imte.type === 'Meuble' ? 'Meublé' : imte.type}} </ion-badge>&nbsp;<ion-badge
+      *ngIf="imte.mode === 'Proposition'">{{ 'MENU.SEARCH' | translate }}</ion-badge>
+    </ion-item>
+    <ion-item text-wrap style="margin-top: -2%">
+      <span>{{imte.quartier.nom}} - {{imte.quartier.ville.nom}}<br></span>
+      <ion-badge *ngIf="imte.mode === 'Proposition'">{{ 'MENU.SEARCH' | translate }}</ion-badge>
+      <span
+        *ngIf="mode !== 'Hotel' && imte.mode !== 'Meuble' && imte.mode !== 'Proposition'"><br> Commission : {{getPrice(imte.commission)}} {{imte.devise}}</span>
+    </ion-item>
+    <ion-item style="background-color: gray">
+      <span>{{imte.titre}}</span>
+      <span
+        *ngIf="imte.type === 'Appartement' || imte.type === 'Maison' || imte.type === 'Studio'"><br>{{imte.pieces}} {{ 'ROOM' | translate }}
+        &nbsp; {{imte.chambres}} {{ 'BEDROOM' | translate }}</span>
+    </ion-item>
+    <ion-item text-wrap *ngIf="imte.tags.length > 0">
+      <span *ngFor="let tag of imte.tags"><ion-badge style="font-size: 18px">{{tag}}</ion-badge>&nbsp;</span>
+    </ion-item>
+    <ion-item text-wrap>
+      <p>{{ 'PUT_ONLINE' | translate }}: {{imte.since}}</p>
+    </ion-item>
+    <ion-item text-wrap>
+      <h1>{{ 'DESC' | translate }}</h1>
+      <p style="font-size: 16px; text-align: justify">{{imte.description}}</p>
+    </ion-item>
+  </ion-list>
+  <div id="messages" class="post-comment-content" style="max-height: 150px;">
+    <p>{{ 'COMMENT' | translate }} ({{comments.length}})</p>
+    <ion-list id="comment">
+      <ion-item *ngFor="let comment of comments">
+        {{ comment.username }}
+        <p style="margin-left: 15px; font-size: 18px">{{comment.message}}</p>
+        <p style="margin-left: 15px; font-size: 12px">{{formatterTimeStampToString(comment.tms)}}</p>
+      </ion-item>
+    </ion-list>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-11>
+          <div class="post-add-comment">
+            <ion-textarea [placeholder]="'YOUR_COMMENT' | translate" [(ngModel)]="msg"
+                          (keydown.enter)="eventCmt($event)"></ion-textarea>
+          </div>
+        </ion-col>
+        <ion-col col-1 style="margin-top: 6%; margin-left: -2%">
+          <ion-badge item-end>
+            <ion-icon color="dimgrey" (click)="eventCmt($event)" name="send"
+                      style="zoom:1.2;"></ion-icon>
+          </ion-badge>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <!-- Div contenant tous les commentaires du post -->
+  </div>
+</ion-content>
+<ion-footer>
+  <ion-row>
+    <ion-col col-6>
+      <a *ngIf="isConnect" [href]="imte.user.phone" ion-button mode="ios" color="secondary" block class="btn_2">
+        <ion-icon slot="start" name="call" style="zoom: 1.0; margin: 2%"></ion-icon>
+        <span style="text-transform: capitalize;">&nbsp;{{ 'CALL' | translate }}</span>
+      </a>
+      <button type="button" *ngIf="!isConnect" (click)="noAccess()" ion-button mode="ios" color="secondary" block
+              class="btn_2">
+        <ion-icon slot="start" name="call" style="zoom: 1.0; margin: 2%"></ion-icon>
+        <span style="text-transform: capitalize;">&nbsp;{{ 'CALL' | translate }}</span>
+      </button>
+    </ion-col>
+    <ion-col col-6>
+      <a *ngIf="isConnect" [href]="imte.user.email" ion-button mode="ios" color="secondary" block class="btn_2">
+        <ion-icon slot="start" name="mail" style="zoom: 1.0; margin: 2%"></ion-icon>
+        <span style="text-transform: capitalize;">&nbsp;{{ 'WRITE' | translate }}</span>
+      </a>
+      <button type="button" *ngIf="!isConnect" (click)="noAccess()" ion-button mode="ios" color="secondary" block
+              class="btn_2">
+        <ion-icon slot="start" name="mail" style="zoom: 1.0; margin: 2%"></ion-icon>
+        <span style="text-transform: capitalize;">&nbsp;{{ 'WRITE' | translate }}</span>
+      </button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

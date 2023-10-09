@@ -1,0 +1,92 @@
+
+<ion-content>
+  <div>
+    <form [formGroup]="signupForm" (submit) = "signup(signupForm.value)" novalidate>
+      <!--<br><br>-->
+      <span mode="ios" style="border-radius: 10px" *ngIf="!isUser">
+        <ion-card-content style="text-align: center; backgshape='round'; -color: #2b6481; color: white">
+          <span class="center" style="font-size: 21px">{{ 'TXT.INSCRP' | translate }}</span><br>
+          {{ 'TXT.CREATE_ACC' | translate }}
+        </ion-card-content>
+      </span>
+      <div mode="ios" style="border-radius: 10px" *ngIf="isUser">
+        <ion-card-content style="text-align: center; backgshape='round'; -color: #2b6481; color: white">
+          <span class="center" style="font-size: 21px">{{ 'UPDATE_PROFILE' | translate }}</span><br>
+          {{ 'TXT_UPDATE_PROFILE' | translate }}
+        </ion-card-content>
+      </div>
+      <ion-list *ngIf="displ1">
+        <ion-item>
+          <ion-label>Je suis un agent immobilier</ion-label>
+          <ion-toggle checked="false" formControlName="adress"></ion-toggle>
+        </ion-item>
+        <ion-item>
+          <ion-select interface="action-sheet" mode="ios" [placeholder]="'TXT.SEX' | translate" formControlName="sex">
+            <ion-select-option value="M">{{ 'TXT.MASC' | translate }}</ion-select-option>
+            <ion-select-option value="F">{{ 'TXT.FEM' | translate }}</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-input inputmode="text" placeholder="Username*" formControlName="username"></ion-input>
+        </ion-item>
+        <span style="color: red; font-size: 14px">{{existUser}}</span>
+        <ion-item>
+          <ion-input inputmode="text" [placeholder]="'TXT.NAME' | translate" formControlName="nom"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input type="number" [placeholder]="'TXT.PHONE' | translate" formControlName="phone" (keyup)="onKeyPhone($event)"></ion-input>
+        </ion-item>
+        <span style="color: red; font-size: 14px">{{existPhone}}</span>
+        <span style="color: red; font-size: 14px" *ngIf="badPhone">{{ 'INVALID_PHONE' | translate }}</span>
+        <ion-item>
+          <ion-input type="email" placeholder="E-mail*" formControlName="email" (keyup)="onKeyEmail($event)"></ion-input>
+        </ion-item>
+        <span style="color: red; font-size: 14px">{{existEmail}}</span>
+        <span style="color: red; font-size: 14px" *ngIf="badEmail">{{ 'INVALID_EMAIL' | translate }}</span>
+        <ion-item class="item">
+          <ion-input [type]="typeInput" [placeholder]="'TXT.PASS' | translate" formControlName="password"></ion-input>
+          <ion-button   (click)="showHidePass()" fill="clear" slot="end">
+            <ion-icon ios="ios-eye" name="eye" *ngIf="typeInput === 'password'"></ion-icon>
+            <ion-icon ios="ios-eye-off" name="eye-off" *ngIf="typeInput === 'text'"></ion-icon>
+          </ion-button>
+        </ion-item>
+        <ion-item>
+          <ion-select interface="action-sheet" mode="ios" [placeholder]="'TXT.COUNTRY' | translate" formControlName="pays">
+            <ion-select-option *ngFor="let c of countries" [value]="c.name">{{c.name}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          {{ 'TXT.REQUIRED' | translate }}}}
+        </ion-item>
+        <ion-item style="color: red">{{noEmailValid}}</ion-item>
+        <ion-button *ngIf="!isUser"  (click)="validEmail()" mode="ios" expand="block" shape="round" [disabled]="!(signupForm.valid && !badEmail && !badPhone)">
+          <span style="text-transform: capitalize;">&nbsp;{{ 'TXT.INSCRP' | translate }}</span>
+        </ion-button>
+        <ion-button *ngIf="isUser" type="submit" mode="ios" expand="block" shape="round" [disabled]="!(signupForm.valid && !badEmail && !badPhone)">
+          <span style="text-transform: capitalize;">&nbsp;{{ 'BTN_UPDATE' | translate }}</span>
+        </ion-button>
+      </ion-list>
+      <ion-list *ngIf="displ2">
+        <ion-item>
+          <ion-label>{{ 'TXT.PUT_CODE' | translate }}</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-input inputmode="number" placeholder="Code*" formControlName="code"></ion-input>
+        </ion-item>
+        <span style="color: red; font-size: 14px">{{notCode}}</span>
+        <ion-row>
+          <ion-col size="6">
+            <ion-button  (click)="precc()" mode="ios" expand="block" shape="round" color="primary">
+              <span style="text-transform: capitalize;">&nbsp;{{ 'TXT.PRECC' | translate }}</span>
+            </ion-button>
+          </ion-col>
+          <ion-col size="6">
+            <ion-button *ngIf="!isUser" type="submit" mode="ios" expand="block" shape="round" [disabled]="!(signupForm.valid && !badEmail && !badPhone)">
+              <span style="text-transform: capitalize;">&nbsp;{{ 'TXT.VALID' | translate }}</span>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-list>
+    </form>
+  </div>
+</ion-content>

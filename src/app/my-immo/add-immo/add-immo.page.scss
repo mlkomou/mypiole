@@ -1,0 +1,22 @@
+ion-item:first-child {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+ion-item:last-child {
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+ion-item.item {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.center {
+  text-align: center;
+  vertical-align: middle;
+  //line-height: 100%;
+}
+.mainContent {
+  overflow: scroll;
+  height: 900px;
+  width: 100%;
+}

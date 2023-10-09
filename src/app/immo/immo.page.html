@@ -1,0 +1,65 @@
+<!--
+  Generated template for the ImmoPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title *ngIf="mode === 'Immo'">{{ 'ESTATE' | translate }}</ion-title>
+    <ion-title *ngIf="mode === 'Terrain'">{{ 'TERRAIN_ESPACE' | translate }}</ion-title>
+    <ion-title *ngIf="mode === 'Hotel'">{{ 'HOTEL' | translate }}</ion-title>
+    <ion-title *ngIf="mode === 'Proposition'">{{ 'TXT.SEARCH_USER' | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <span mode="ios" style="border-radius: 10px"  *ngIf="load">
+    <ion-card-content style="text-align: center; background-color: #2b6481; color: white">
+      {{ 'MSG.RESULT_SEARCH' | translate }}
+    </ion-card-content>
+  </span>
+  <ion-list lines="none" padding *ngIf="load">
+    <span *ngFor="let imte of imtes; let i = index">
+      <ion-row (click)="goToDetail(imte)">
+        <ion-col size="4">
+          <img [src]="imte.images[0].path">
+        </ion-col>
+        <ion-col size="8">
+          <ion-item text-wrap style="margin-top: -6%">
+            <h2><ion-badge>{{imte.type === 'Meuble' ? 'Meublé' : imte.type}}</ion-badge>&nbsp;<ion-badge *ngIf="imte.mode === 'Proposition'">{{ 'MENU.SEARCH' | translate }}</ion-badge></h2>
+            <h2 style="color: #2b6481" *ngIf="imte.mode === 'Immo' && imte.location">{{getPrice(imte.prix)}} {{imte.devise}} / {{ 'MONTH' | translate }}</h2>
+            <h2 style="color: #2b6481" *ngIf="imte.mode === 'Immo' && !imte.location">{{getPrice(imte.prix)}} {{imte.devise}}</h2>
+            <h2 *ngIf="imte.mode === 'Terrain' || imte.mode === 'Hotel' || imte.mode === 'Proposition'">{{imte.titre}}</h2>
+            <h2 style="color: #2b6481" *ngIf="imte.mode === 'Terrain'">{{getPrice(imte.prix)}} {{imte.devise}} / m<sup>2</sup></h2>
+            <h2>{{imte.quartier.nom}} - {{imte.quartier.ville.nom}}</h2>
+            <h2 *ngIf="imte.mode === 'Hotel' || imte.mode === 'Proposition'">{{getPrice(imte.prixMin)}} - {{getPrice(imte.prixMax)}} {{imte.devise}}</h2>
+            <h2 *ngIf="(imte.type === 'Appartement' || imte.type === 'Maison') && imte.mode === 'Immo'">{{imte.pieces}} {{ 'ROOM' | translate }} &nbsp; {{imte.chambres}} {{ 'BEDROOM' | translate }}</h2>
+            <p>
+              <ion-row>
+                <ion-col size="10"> {{imte.since}} </ion-col>
+                <ion-col size="2">
+                  <ion-icon *ngIf="!imte.isFavorite" style="zoom: 1.3;" slot="start" name="heart-outline"></ion-icon>
+                  <ion-icon *ngIf="imte.isFavorite" style="zoom: 1.3;" slot="start" name="heart" color="secondary"></ion-icon>
+                </ion-col>
+              </ion-row>
+            </p>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <hr>
+    </span>
+
+    <!--    <span *ngIf="imtes.length === 0 && result" style="margin-top: 25px">-->
+    <span *ngIf="result" style="margin-top: 25px">
+      <ion-card-content style="text-align: center">
+        {{ 'MSG.RESULT_NOTHING' | translate }}
+      </ion-card-content>
+      <ion-card-content *ngIf="mode !== 'Proposition' && mode !== 'Hotel' && imtes.length < 20" style="text-align: center; margin-top: 15px">
+        <span (click)="addLocation('mode')" [innerHTML]="textAdd"></span>
+        <!--Vous ne trouvez aucun resultat répondant à vos exigences? <a (click)="addLocation(mode)">Cliquez-ici</a> pour publier votre besoin dans le système.<br><br>-->
+      </ion-card-content>
+    </span>
+  </ion-list>
+</ion-content>

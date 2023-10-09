@@ -1,0 +1,59 @@
+<ion-content>
+  <swiper #slides (slideChange)="getSlide($event)">
+    <ng-template swiperSlide>
+      <div class="mainContent">
+        <h1 class="slide-title">{{ 'LOAD.TITLE1' | translate }}</h1>
+        <p class="slide-desc" style="color: white" [innerHTML]="'LOAD.DESC1' | translate"></p>
+        <span class="slide-next">
+          <ion-button  (click)="next(1)" mode="ios" shape="round" size="small">
+              {{ 'NEXT' | translate }}&nbsp;<ion-icon slot="end" name="arrow-forward"></ion-icon>
+          </ion-button>
+      </span>
+      </div>
+    </ng-template>
+
+    <ng-template swiperSlide>
+      <div class="mainContent">
+        <h1 class="slide-title" style="color: white">{{ 'LOAD.TITLE2' | translate }}</h1>
+        <p style="color: white" class="slide-desc" [innerHTML]="'LOAD.DESC2' | translate">
+        </p>
+        <span class="slide-next">
+          <ion-button  (click)="next(2)" mode="ios" shape="round" size="small">
+              {{ 'NEXT' | translate }}&nbsp;<ion-icon slot="end" name="arrow-forward"></ion-icon>
+          </ion-button>
+      </span>
+      </div>
+    </ng-template>
+
+    <ng-template swiperSlide>
+      <div class="mainContent">
+        <h1 class="slide-title">{{ 'LOAD.TITLE3' | translate }}</h1>
+        <p class="slide-desc" [innerHTML]="'LOAD.DESC3' | translate">
+        </p>
+        <span class="slide-next">
+          <ion-button  (click)="next(3)" mode="ios" shape="round" size="small">
+              {{ 'NEXT' | translate }}&nbsp;<ion-icon slot="end" name="arrow-forward"></ion-icon>
+          </ion-button>
+      </span>
+      </div>
+    </ng-template>
+
+    <ng-template swiperSlide>
+      <div class="mainContent">
+        <h1 class="slide-title">{{ 'LOAD.TITLE4' | translate }}</h1>
+        <p class="slide-desc">
+          <strong [innerHTML]="'LOAD.DESC4' | translate"></strong>
+          <ion-item>
+            <ion-label  (click)="loadCond()"  [innerHTML]="'LOAD.COND' | translate"></ion-label>
+            <ion-checkbox  mode="ios" (ionChange)="changeV()" [(ngModel)]="go" color="success"></ion-checkbox>
+          </ion-item>
+        </p>
+        <span class="slide-next">
+          <ion-button  (click)="next(4)" mode="ios" shape="round" size="small">
+              {{ 'LOAD.GO' | translate }}
+          </ion-button>
+      </span>
+      </div>
+    </ng-template>
+  </swiper>
+</ion-content>

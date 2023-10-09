@@ -1,0 +1,322 @@
+<ion-content class="bgmodal" *ngIf="data">
+  <div *ngIf="data.modal === 'Type'">
+    <ion-list>
+      <ion-list-header>
+        {{ 'TYPE_BIEN' | translate }} {{data.mode}}
+      </ion-list-header>
+      <ion-item-group *ngIf="data.mode === 'Locat' || data.mode === 'Prop'">
+        <ion-item-divider color="light">
+          <ion-label>{{ 'BEDROOM' | translate }}</ion-label>
+          <ion-checkbox color="primary" slot="end" mode="ios" [(ngModel)]="chambre"
+                        (ionChange)="changeChm()"></ion-checkbox>
+        </ion-item-divider>
+      </ion-item-group>
+
+      <ion-item-group *ngIf="data.mode === 'Locat' || data.mode === 'Prop'">
+        <ion-item-divider color="light">
+          <ion-label>{{ 'STUDIO' | translate }}</ion-label>
+          <ion-checkbox color="primary" slot="end" mode="ios" [(ngModel)]="studio"
+                        (ionChange)="changeStd()"></ion-checkbox>
+        </ion-item-divider>
+      </ion-item-group>
+
+      <ion-item-group *ngIf="data.mode === 'Locat' || data.mode === 'Prop'">
+        <ion-item-divider color="light">
+          <ion-label>{{ 'APARTMENT' | translate }}</ion-label>
+          <ion-checkbox color="primary" slot="end" mode="ios" [(ngModel)]="appart"
+                        (ionChange)="changeApp()"></ion-checkbox>
+        </ion-item-divider>
+      </ion-item-group>
+
+      <ion-item-group *ngIf="data.mode === 'Locat' || data.mode === 'Prop'">
+        <ion-item-divider color="light">
+          <ion-label>{{ 'HOUSE' | translate }}</ion-label>
+          <ion-checkbox color="primary" slot="end" mode="ios" [(ngModel)]="maison"
+                        (ionChange)="changeMsn()"></ion-checkbox>
+        </ion-item-divider>
+      </ion-item-group>
+
+      <ion-item-group *ngIf="data.mode === 'Locat' || data.mode === 'Prop'">
+        <ion-item-divider color="light">
+          <ion-label>{{ 'OFFICE' | translate }}</ion-label>
+          <ion-checkbox color="primary" slot="end" mode="ios" [(ngModel)]="commerce"></ion-checkbox>
+        </ion-item-divider>
+      </ion-item-group>
+
+      <ion-item-group *ngIf="data.mode === 'Locat' || data.mode === 'Prop'">
+        <ion-item-divider color="light">
+          <ion-label>{{ 'STORE' | translate }}</ion-label>
+          <ion-checkbox color="primary" slot="end" mode="ios" [(ngModel)]="store"></ion-checkbox>
+        </ion-item-divider>
+      </ion-item-group>
+
+      <ion-item-group *ngIf="data.mode === 'Locat' || data.mode === 'Prop'">
+        <ion-item-divider color="light">
+          <ion-label>{{ 'SALLE' | translate }}</ion-label>
+          <ion-checkbox color="primary" slot="end" mode="ios" [(ngModel)]="salle"></ion-checkbox>
+        </ion-item-divider>
+      </ion-item-group>
+
+      <ion-item-group *ngIf="data.mode === 'Locat' || data.mode === 'Prop'">
+        <ion-item-divider color="light">
+          <ion-label>{{ 'TYPE.BOUTIQUE' | translate }}</ion-label>
+          <ion-checkbox color="primary" slot="end" mode="ios" [(ngModel)]="boutique"></ion-checkbox>
+        </ion-item-divider>
+      </ion-item-group>
+
+      <ion-item-group *ngIf="data.mode === 'Locat' || data.mode === 'Prop'">
+        <ion-item-divider color="light">
+          <ion-label>{{ 'TYPE.COMMERCE' | translate }}</ion-label>
+          <ion-checkbox color="primary" slot="end" mode="ios" [(ngModel)]="fondCommerce"></ion-checkbox>
+        </ion-item-divider>
+      </ion-item-group>
+
+      <ion-item-group *ngIf="data.mode === 'Coloc' || data.mode === 'Prop'">
+        <ion-item-divider color="light">
+          <ion-label>{{ 'COLOC' | translate }}</ion-label>
+          <ion-checkbox color="primary" slot="end" mode="ios" [(ngModel)]="colocation"></ion-checkbox>
+        </ion-item-divider>
+      </ion-item-group>
+
+      <ion-item-group *ngIf="data.mode === 'Coloc' || data.mode === 'Prop'">
+        <ion-item-divider color="light">
+          <ion-label>{{ 'OFFICE' | translate }}</ion-label>
+          <ion-checkbox color="primary" slot="end" mode="ios" [(ngModel)]="commerce"></ion-checkbox>
+        </ion-item-divider>
+      </ion-item-group>
+
+      <!--<ion-item-group>-->
+      <!--<ion-item-divider color="light">-->
+      <!--<ion-label>Parking</ion-label>-->
+      <!--<ion-checkbox color="primary" slot="end" mode="ios" [(ngModel)]="parking"></ion-checkbox>-->
+      <!--</ion-item-divider>-->
+      <!--</ion-item-group>-->
+
+      <ion-item-group *ngIf="data.mode === 'Terrain' || data.mode === 'Prop'">
+        <ion-item-divider color="light">
+          <ion-label>{{ 'SPACE_RENTAL' | translate }}</ion-label>
+          <ion-checkbox color="primary" slot="end" mode="ios" [(ngModel)]="space"></ion-checkbox>
+        </ion-item-divider>
+      </ion-item-group>
+
+      <ion-item-group *ngIf="data.mode === 'Terrain' || data.mode === 'Prop'">
+        <ion-item-divider color="light">
+          <ion-label>{{ 'LAND_SALE' | translate }}</ion-label>
+          <ion-checkbox color="primary" slot="end" mode="ios" [(ngModel)]="terrain"></ion-checkbox>
+        </ion-item-divider>
+      </ion-item-group>
+
+      <!--<ion-item-group>-->
+      <!--<ion-item-divider color="light">-->
+      <!--<ion-label>Autres</ion-label>-->
+      <!--<ion-checkbox color="primary" slot="end" mode="ios" [(ngModel)]="autre"></ion-checkbox>-->
+      <!--</ion-item-divider>-->
+      <!--</ion-item-group>-->
+
+    </ion-list>
+  </div>
+
+  <div *ngIf="data.modal === 'LocationVille'">
+    <ion-list>
+      <ion-list-header>
+        {{ 'PLACES' | translate }}
+      </ion-list-header>
+      <ion-searchbar [(ngModel)]="searchQuery" (ionInput)="getItemsV($event)" (keyup)="writeThisV($event)" (keydown.enter)="selectThisV($event)"></ion-searchbar>
+      <ion-item >
+        <ion-badge style="margin-left: 5%; font-size: 18px" *ngFor="let item of selectVilles; let i = index" (click)="removeEltC(i)">
+          {{item}} x
+        </ion-badge>
+      </ion-item>
+      <ion-list>
+        <span *ngFor="let item of itemsV;" (click)="getValueV(item.nom)">
+          <ion-item mode="ios">
+            <span>{{ item.nom }}</span>
+          </ion-item>
+        </span>
+      </ion-list>
+      <ion-item >
+        <ion-icon ios="ios-information-circle" md="md-information-circle"></ion-icon>&nbsp;
+        {{ 'MSG.SELECT_CITY' | translate }}
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <div *ngIf="data.modal === 'LocationQtier'">
+    <ion-list>
+      <ion-list-header>
+        {{ 'PLACES' | translate }}
+      </ion-list-header>
+      <ion-searchbar [(ngModel)]="searchQuery" (ionInput)="getItems($event)" (keyup)="writeThis($event)" (keydown.enter)="selectThis($event)"></ion-searchbar>
+      <ion-item >
+        <ion-badge style="margin-left: 5%; font-size: 18px" *ngFor="let item of selectQters; let i = index" (click)="removeElt(i)">
+          {{item}} x
+        </ion-badge>
+      </ion-item>
+      <ion-list>
+        <span *ngFor="let item of items; let i = index" (click)="getValue(item.nom)">
+          <ion-item mode="ios" *ngIf="i < 3">
+            <span>{{ item.nom }}</span>
+          </ion-item>
+        </span>
+      </ion-list>
+      <ion-item  *ngIf="data.mode != 'Terrain' && data.mode != 'Prop'">
+        <ion-icon ios="ios-information-circle" md="md-information-circle"></ion-icon>&nbsp;
+        {{ 'MSG.SELECT_QUATER' | translate }}
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <div *ngIf="data.modal === 'Criteria'">
+    <ion-list>
+      <ion-list-header>
+        {{ 'OTHER_CRITERIA' | translate }}
+      </ion-list-header>
+      <ion-searchbar [(ngModel)]="searchCrt" (keyup)="onKeyCriteria($event)"></ion-searchbar>
+      <ion-item >
+        <ion-badge style="margin-left: 5%; font-size: 18px" *ngFor="let item of selectCriteria; let i = index" (click)="removeEltC(i)">
+          {{item}} x
+        </ion-badge>
+      </ion-item>
+      <ion-item  *ngIf="data.mode === 'Coloc' || data.mode === 'Locat'">
+        <ion-icon ios="ios-information-circle" md="md-information-circle"></ion-icon>
+        {{ 'MSG.SELECT_CRITERIA_1' | translate }}
+      </ion-item>
+      <ion-item  *ngIf="data.mode === 'Terrain'">
+        <ion-icon ios="ios-information-circle" md="md-information-circle"></ion-icon>
+        {{ 'MSG.SELECT_CRITERIA_2' | translate }}
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <div *ngIf="data.modal === 'Prix'" no-padding>
+    <ion-list>
+      <ion-list-header>
+        {{ 'BUDGET' | translate }}
+      </ion-list-header>
+      <ion-item >
+        <ion-label>{{ 'DEVISE' | translate }}</ion-label>
+        <!--(ionChange)="changeDevice()"-->
+        <ion-select interface="action-sheet" mode="ios" [(ngModel)]="device">
+          <ion-select-option *ngFor="let d of devices" [value]="d.device">{{d.device}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-row>
+        <ion-col size="5">
+          <ion-item>
+            <!--<span slot="start">{{ 'DE' | translate }}</span>-->
+            <ion-input [placeholder]="'DE' | translate" (keyup)="onKeyPrice($event, 'min')" inputmode="numeric" mode="ios" clearInput placeholder="Prix" [(ngModel)]="prixI" ></ion-input>
+            <!--<span slot="end">{{device}}</span>-->
+          </ion-item>
+        </ion-col>
+        <ion-col size="5">
+          <ion-item>
+            <!--<span slot="start">{{ 'A' | translate }}</span>-->
+            <ion-input [placeholder]="'A' | translate" (keyup)="onKeyPrice($event, 'max')" inputmode="numeric" mode="ios" clearInput placeholder="Prix" [(ngModel)]="prixS" ></ion-input>
+            <!--<span slot="end">{{device}}</span>-->
+          </ion-item>
+        </ion-col>
+        <ion-col size="2">
+          <ion-item>
+            <span slot="start">{{device}}</span>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-item >
+        <ion-icon ios="ios-information-circle" md="md-information-circle"></ion-icon>&nbsp;
+        {{ 'MSG.PUT_BUDGET' | translate }}
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <div *ngIf="data.modal === 'Surface'">
+    <ion-list>
+      <ion-list-header>
+        Surface
+      </ion-list-header>
+      <ion-row>
+        <ion-col size="6">
+          <ion-item>
+            <span slot="start">{{ 'DE' | translate }}</span>
+            <ion-input (keyup)="onKeySurf($event, 'min')" inputmode="numeric" mode="ios" [(ngModel)]="surfI" ></ion-input>
+            <span slot="end">m<sup>2</sup></span>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item>
+            <span slot="start">{{ 'A' | translate }}</span>
+            <ion-input (keyup)="onKeySurf($event, 'max')" inputmode="numeric" mode="ios" clearInput [(ngModel)]="surfS" ></ion-input>
+            <span slot="end">m<sup>2</sup></span>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-item >
+        <ion-icon ios="ios-information-circle" md="md-information-circle"></ion-icon>&nbsp;
+        {{ 'MSG.PUT_SURFACE' | translate }}
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <div *ngIf="data.modal == 'Loading'">
+    <div padding class="text-to-change">
+      <h1>{{ 'CONDITION' | translate }}</h1> <br>
+      <div>
+        <p style="text-align: justify;
+    margin: .25rem;
+    padding: .25rem;
+    font-size: 18px;" [innerHTML]="'CONDITION_TEXT' | translate"></p>
+      </div>
+    </div>
+  </div>
+
+</ion-content>
+
+<ion-footer *ngIf="data.modal === 'Loading'">
+  <ion-toolbar>
+    <ion-title>
+      <ion-row>
+        <ion-col>
+          <ion-button  mode="ios" (click)="closeModal('')"
+                  style="width: 100%; background: #ffb300; color: white; height: 50px; border-radius: 30px">
+            <span style="text-transform: capitalize;">{{ 'CLOSE' | translate }}</span>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-title>
+  </ion-toolbar>
+</ion-footer>
+
+<ion-footer *ngIf="data.modal !== 'Other' && data.modal !== 'Loading'">
+  <ion-toolbar>
+    <ion-title>
+      <ion-row>
+        <ion-col>
+          <ion-button  mode="ios" (click)="closeModal('')"
+                  style="width: 100%; background: #f15b4d; color: white; height: 50px; border-radius: 30px">
+            <span style="text-transform: capitalize;">{{ 'VALID' | translate }}</span>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-title>
+  </ion-toolbar>
+</ion-footer>
+
+<ion-footer *ngIf="data.modal === 'Other'">
+  <ion-toolbar>
+    <ion-title>
+      <ion-row>
+        <ion-col size="4" class="btn">
+          <ion-button style="background-color: red;" class="ion-text-right"  mode="ios" shape="round" size="small"
+                  (click)="closeModal('NON')">
+            <ion-icon name="close"></ion-icon>&nbsp;NON
+          </ion-button>
+        </ion-col>
+        <ion-col size="4"></ion-col>
+        <ion-col size="4" class="center btn">
+          <ion-button class="ion-text-right"  mode="ios" shape="round" size="small" (click)="closeModal('OUI')">
+            <ion-icon name="checkmark-circle-outline"></ion-icon>&nbsp;OUI
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-title>
+  </ion-toolbar>
+</ion-footer>

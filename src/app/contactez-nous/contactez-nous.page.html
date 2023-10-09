@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>{{ "TXT.CONTACT" | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="box flex">
+    <p>
+      <img src="./assets/imgs/mypiole-text-blue.png">
+      <br><br><br>{{ 'HELLO' | translate }} <br><br>
+      {{ 'CONTACT1' | translate }} <br><br>
+      {{ 'CONTACT2' | translate }} <br>
+      {{ 'CONTACT3' | translate }} <br> <br><br>
+      <ion-row>
+        <ion-col>
+          <a href="tel:+23756002697">
+            <ion-icon color="text" ios="ios-call" name="call" style="zoom: 2.0"></ion-icon>
+            {{ 'CALL' | translate }}
+          </a>
+        </ion-col>
+        <ion-col>
+          <a href="mailto:takaludovic1@gmail.com">
+            <ion-icon color="text" ios="ios-mail-outline" name="mail" style="zoom: 2.0"></ion-icon>
+            {{ 'WRITE' | translate }}
+          </a>
+        </ion-col>
+      </ion-row>
+    </p>
+  </div>
+</ion-content>

@@ -1,0 +1,273 @@
+<ion-content>
+  <ion-segment [(ngModel)]="pet" color="secondary" mode="ios" style="--border-radius: 10px; margin-top: 10%" *ngIf="mode === 'Coloc'">
+    <ion-segment-button value="searchLocat">
+      <span class="center">{{ 'SEARCH' | translate }}</span>
+    </ion-segment-button>
+    <ion-segment-button value="addLocat">
+      {{ 'ADD' | translate }}
+    </ion-segment-button>
+  </ion-segment>
+  <ion-segment [(ngModel)]="pet2" color="secondary" mode="ios" style="--border-radius: 10px; margin-top: 10%" *ngIf="mode === 'Terrain'">
+    <ion-segment-button value="searchTerrain">
+      <span class="center">{{ 'SEARCH' | translate }}</span>
+    </ion-segment-button>
+    <ion-segment-button value="addTerrain">
+      {{ 'ADD' | translate }}
+    </ion-segment-button>
+  </ion-segment>
+  <ion-segment [(ngModel)]="pet3" color="secondary" mode="ios" style="--border-radius: 10px; margin-top: 10%" *ngIf="mode === 'Hotel'">
+    <ion-segment-button value="searchHotel">
+      <span class="center">{{ 'SEARCH' | translate }}</span>
+    </ion-segment-button>
+    <ion-segment-button value="addHotel">
+      {{ 'ADD' | translate }}
+    </ion-segment-button>
+  </ion-segment>
+  <ion-segment [(ngModel)]="pet4" color="secondary" mode="ios" style="--border-radius: 10px; margin-top: 10%" *ngIf="mode === 'Meuble'">
+    <ion-segment-button value="searchMeuble">
+      <span class="center">{{ 'SEARCH' | translate }}</span>
+    </ion-segment-button>
+    <ion-segment-button value="addMeuble">
+      {{ 'ADD' | translate }}
+    </ion-segment-button>
+  </ion-segment>
+  <ion-card color="primary" mode="ios" style="--border-radius: 10px;" *ngIf="mode === 'Locat'">
+    <ion-card-content style="text-align: center">
+      {{ 'MSG.TYPEANDQUATER' | translate }}
+    </ion-card-content>
+  </ion-card>
+  <i padding style="font-size: 12px; text-align: center">{{ 'SEARCH_CHOICE' | translate }}</i>
+  <div style="margin-top: 4%;" *ngIf="mode === 'Locat'">
+    <ion-list>
+      <ion-item>
+        <ion-label>{{textLoc}}</ion-label>
+        <ion-toggle checked="true" [(ngModel)]="isLoc" (ionChange)="isLocat()"></ion-toggle>
+      </ion-item>
+      <ion-button mode="ios" (click)="searchCriteria('Type')" block outline class="btn">
+        <span style="" *ngIf="!noType">{{ type }}</span>
+        <span color="dark" *ngIf="noType" style="color: #222;">{{ type }}</span>
+        <ion-icon name="help-circle" item-end style="margin-right: -0%;"></ion-icon>
+      </ion-button>
+      <ion-button mode="ios" (click)="searchCriteria('LocationVille')" block outline class="btn">
+        <span style="text-transform: capitalize;" *ngIf="!noLocatVille">{{ locatVille }}</span>
+        <span color="dark" *ngIf="noLocatVille" style="color: #222;">{{ locatVille }}</span>
+        <ion-icon name="pin" item-end style="margin-right: -0%;"></ion-icon>
+      </ion-button>
+      <ion-button mode="ios" (click)="searchCriteria('LocationQtier')" block outline class="btn">
+        <span style="text-transform: capitalize;" *ngIf="!noLocat">{{ locat }}</span>
+        <span color="dark" *ngIf="noLocat" style="color: #222;">{{ locat }}</span>
+        <ion-icon name="pin" item-end style="margin-right: -0%;"></ion-icon>
+      </ion-button>
+      <ion-button mode="ios" (click)="searchCriteria('Prix')" block outline class="btn">
+        <span *ngIf="!noPrix">{{ prix }}</span>
+        <span color="dark" *ngIf="noPrix" style="color: #222;">{{ prix }}</span>
+        <ion-icon name="cash" item-end style="margin-right: -0%;"></ion-icon>
+      </ion-button>
+      <!--<ion-button mode="ios" (click)="searchCriteria('Criteria')" block outline class="btn">-->
+      <!--<span *ngIf="!noCriteria">{{ criteria }}</span>-->
+      <!--<span color="dark" *ngIf="noCriteria" style="color: #222;">{{ criteria }}</span>-->
+      <!--<ion-icon name="checkbox-outline" item-end style="margin-right: -0%;"></ion-icon>-->
+      <!--</ion-button>-->
+      <!--<ion-button (click)="noSearch()" *ngIf="(!noLocat || !noType)" mode="ios" color="secondary" block class="btn_2">-->
+      <!--<span>{{ 'MSG.PUTTYPEANDQUARTER' | translate }}</span>-->
+      <!--</ion-button>-->
+      <ion-button mode="ios" (click)="searchImmo('Immo')" color="secondary" block class="btn_2">
+        <ion-icon slot="start" name="search" style="zoom: 1.0; margin: 2%"></ion-icon>
+        <span style="text-transform: capitalize;">{{ 'SEARCH' | translate }}</span>
+      </ion-button>
+    </ion-list>
+  </div>
+
+  <div [ngSwitch]="pet" *ngIf="mode === 'Coloc'">
+    <ion-list *ngSwitchCase="'searchLocat'">
+      <ion-card color="primary" mode="ios" style="--border-radius: 10px;">
+        <ion-card-content style="text-align: center">
+          {{ 'MSG.QUARTER' | translate }}
+        </ion-card-content>
+      </ion-card>
+      <ion-button mode="ios" (click)="searchCriteria('LocationVille')" block outline class="btn">
+        <span style="text-transform: capitalize;" *ngIf="!noLocatVille">{{ locatVille }}</span>
+        <span color="dark" *ngIf="noLocatVille" style="color: #222;">{{ locatVille }}</span>
+        <ion-icon name="pin" item-end style="margin-right: -0%;"></ion-icon>
+      </ion-button>
+      <ion-button mode="ios" (click)="searchCriteria('LocationQtier')" block outline class="btn">
+        <span style="text-transform: capitalize;" *ngIf="!noLocat">{{ locat }}</span>
+        <span color="dark" *ngIf="noLocat" style="color: #222;">{{ locat }}</span>
+        <ion-icon name="pin" item-end style="margin-right: -0%;"></ion-icon>
+      </ion-button>
+      <ion-button mode="ios" (click)="searchCriteria('Prix')" block outline class="btn">
+        <span *ngIf="!noPrix">{{ prix }}</span>
+        <span color="dark" *ngIf="noPrix" style="color: #222;">{{ prix }}</span>
+        <ion-icon name="cash" item-end style="margin-right: -0%;"></ion-icon>
+      </ion-button>
+      <!--<ion-button mode="ios" (click)="searchCriteria('Criteria')" block outline class="btn">-->
+      <!--<span *ngIf="!noCriteria">{{ criteria }}</span>-->
+      <!--<span color="dark" *ngIf="noCriteria" style="color: #222;">{{ criteria }}</span>-->
+      <!--<ion-icon name="checkbox-outline" item-end style="margin-right: -0%;"></ion-icon>-->
+      <!--</ion-button>-->
+      <!--<ion-button (click)="noSearch()" *ngIf="!noLocat"  mode="ios" color="secondary" block class="btn_2">-->
+      <!--<span>{{ 'MSG.PUTQUARTER' | translate }}</span>-->
+      <!--</ion-button>-->
+      <ion-button  mode="ios" (click)="searchImmo('Immo')" color="secondary" block class="btn_2">
+        <ion-icon slot="start" name="search" style="zoom: 1.0; margin: 2%"></ion-icon>
+        <span style="text-transform: capitalize;">{{ 'SEARCH' | translate }}</span>
+      </ion-button>
+    </ion-list>
+    <ion-list *ngSwitchCase="'addLocat'">
+      <div class="box flex center" >
+        <p>
+          <span class="center">
+        <h2>Co-Location!</h2>
+        <span (click)="addLocation('Co-Location')" [innerHTML]="textAddColoc"></span>
+        <!--Voulez-vous un co-locataire pour co-habiter et allerger votre charge lié au logement. <a (click)="addLocation('Co-Location')">Cliquez-ici</a> pour ajouter votre immobilier.<br><br>-->
+        </span>
+        </p>
+      </div>
+    </ion-list>
+  </div>
+
+  <div [ngSwitch]="pet2" *ngIf="mode === 'Terrain'">
+    <ion-list *ngSwitchCase="'searchTerrain'">
+      <ion-card color="primary" mode="ios" style="--border-radius: 10px;">
+        <ion-card-content style="text-align: center">
+          {{ 'MSG.VILLE' | translate }}
+        </ion-card-content>
+      </ion-card>
+      <ion-item>
+        <ion-label>{{textLoc}}</ion-label>
+        <ion-toggle checked="true" [(ngModel)]="isLoc" (ionChange)="isLocat()"></ion-toggle>
+      </ion-item>
+      <ion-button mode="ios" (click)="searchCriteria('Type')" block outline class="btn">
+        <span style="" *ngIf="!noType">{{ type }}</span>
+        <span color="dark" *ngIf="noType" style="color: #222;">{{ type }}</span>
+        <ion-icon name="help-circle" item-end style="margin-right: -0%;"></ion-icon>
+      </ion-button>
+      <ion-button mode="ios" (click)="searchCriteria('LocationVille')" block outline class="btn">
+        <span style="text-transform: capitalize;" *ngIf="!noLocatVille">{{ locatVille }}</span>
+        <span color="dark" *ngIf="noLocatVille" style="color: #222;">{{ locatVille }}</span>
+        <ion-icon name="pin" item-end style="margin-right: -0%;"></ion-icon>
+      </ion-button>
+      <ion-button mode="ios" (click)="searchCriteria('Surface')" block outline class="btn">
+        <span *ngIf="!noSurface">{{ surface }}</span>
+        <span color="dark" *ngIf="noSurface" style="color: #222;">{{ surface }}</span>
+        <ion-icon name="grid" item-end style="margin-right: -0%;"></ion-icon>
+      </ion-button>
+      <ion-button mode="ios" (click)="searchCriteria('Prix')" block outline class="btn">
+        <span *ngIf="!noPrix">{{ prix }}</span>
+        <span color="dark" *ngIf="noPrix" style="color: #222;">{{ prix }}</span>
+        <ion-icon name="cash" item-end style="margin-right: -0%;"></ion-icon>
+      </ion-button>
+      <!--<ion-button mode="ios" (click)="searchCriteria('Criteria')" block outline class="btn">-->
+      <!--<span *ngIf="!noCriteria">{{ criteria }}</span>-->
+      <!--<span color="dark" *ngIf="noCriteria" style="color: #222;">{{ criteria }}</span>-->
+      <!--<ion-icon name="checkbox-outline" item-end style="margin-right: -0%;"></ion-icon>-->
+      <!--</ion-button>-->
+      <!--<ion-button (click)="noSearch()" *ngIf="!noLocat"  mode="ios" color="secondary" block class="btn_2">-->
+      <!--<span>{{ 'MSG.PUTQUARTER' | translate }}</span>-->
+      <!--</ion-button>-->
+      <ion-button mode="ios" (click)="searchImmo('Terrain')" color="secondary" block class="btn_2">
+        <ion-icon slot="start" name="search" style="zoom: 1.0; margin: 2%"></ion-icon>
+        <span style="text-transform: capitalize;">{{ 'SEARCH' | translate }}</span>
+      </ion-button>
+    </ion-list>
+    <ion-list *ngSwitchCase="'addTerrain'">
+      <div class="box flex center" >
+        <p>
+          <span class="center">
+        <h2>{{ 'TERRAIN' | translate }}</h2>
+        <span (click)="addLocation('Terrain')" [innerHTML]="textAddTerr"></span>
+        <!--Vous disposez des terrains à vendre ou bien d'une espace libre à louer à des fins commerciaux par des tiers? <a (click)="addLocation('Terrain')">Cliquez-ici</a> pour ajouter votre terrain ou espace libre.<br><br>-->
+        </span>
+        </p>
+      </div>
+    </ion-list>
+  </div>
+
+  <div [ngSwitch]="pet3" *ngIf="mode === 'Hotel'">
+    <ion-list *ngSwitchCase="'searchHotel'">
+      <ion-card color="primary" mode="ios" style="--border-radius: 10px;">
+        <ion-card-content style="text-align: center">
+          {{ 'MSG.QUARTER' | translate }}
+        </ion-card-content>
+      </ion-card>
+      <ion-button mode="ios" (click)="searchCriteria('LocationVille')" block outline class="btn">
+        <span style="text-transform: capitalize;" *ngIf="!noLocatVille">{{ locatVille }}</span>
+        <span color="dark" *ngIf="noLocatVille" style="color: #222;">{{ locatVille }}</span>
+        <ion-icon name="pin" item-end style="margin-right: -0%;"></ion-icon>
+      </ion-button>
+      <ion-button mode="ios" (click)="searchCriteria('LocationQtier')" block outline class="btn">
+        <span style="text-transform: capitalize;" *ngIf="!noLocat">{{ locat }}</span>
+        <span color="dark" *ngIf="noLocat" style="color: #222;">{{ locat }}</span>
+        <ion-icon name="pin" item-end style="margin-right: -0%;"></ion-icon>
+      </ion-button>
+      <ion-button mode="ios" (click)="searchCriteria('Prix')" block outline class="btn">
+        <span *ngIf="!noPrix">{{ prix }}</span>
+        <span color="dark" *ngIf="noPrix" style="color: #222;">{{ prix }}</span>
+        <ion-icon name="cash" item-end style="margin-right: -0%;"></ion-icon>
+      </ion-button>
+      <!--<ion-button mode="ios" (click)="searchCriteria('Criteria')" block outline class="btn">-->
+      <!--<span *ngIf="!noCriteria">{{ criteria }}</span>-->
+      <!--<span color="dark" *ngIf="noCriteria" style="color: #222;">{{ criteria }}</span>-->
+      <!--<ion-icon name="checkbox-outline" item-end style="margin-right: -0%;"></ion-icon>-->
+      <!--</ion-button>-->
+      <!--<ion-button (click)="noSearch()" *ngIf="!noLocat"  mode="ios" color="secondary" block class="btn_2">-->
+      <!--<span>{{ 'MSG.PUTQUARTER' | translate }}</span>-->
+      <!--</ion-button>-->
+      <ion-button mode="ios" (click)="searchImmo('Hotel')" color="secondary" block class="btn_2">
+        <ion-icon slot="start" name="search" style="zoom: 1.0; margin: 2%"></ion-icon>
+        <span style="text-transform: capitalize;">{{ 'SEARCH' | translate }}</span>
+      </ion-button>
+    </ion-list>
+    <ion-list *ngSwitchCase="'addHotel'">
+      <div class="box flex center" >
+        <p>
+          <span class="center">
+        <h2>{{ 'HOTELORAUBERGE' | translate }}</h2>
+        <span (click)="addLocation('Hotel')" [innerHTML]="textAddHotel"></span>
+        <!--Voulez-vous faire la promotion de votre hôtel ou auberge? <a (click)="addLocation('Hotel')">Cliquez-ici</a> pour l'ajouter.<br><br>-->
+        </span>
+        </p>
+      </div>
+    </ion-list>
+  </div>
+
+  <div [ngSwitch]="pet4" *ngIf="mode === 'Meuble'">
+    <ion-list *ngSwitchCase="'searchMeuble'">
+      <ion-card color="primary" mode="ios" style="--border-radius: 10px;">
+        <ion-card-content style="text-align: center">
+          {{ 'MSG.QUARTER' | translate }}
+        </ion-card-content>
+      </ion-card>
+      <ion-button mode="ios" (click)="searchCriteria('LocationVille')" block outline class="btn">
+        <span style="text-transform: capitalize;" *ngIf="!noLocatVille">{{ locatVille }}</span>
+        <span color="dark" *ngIf="noLocatVille" style="color: #222;">{{ locatVille }}</span>
+        <ion-icon name="pin" item-end style="margin-right: -0%;"></ion-icon>
+      </ion-button>
+      <ion-button mode="ios" (click)="searchCriteria('LocationQtier')" block outline class="btn">
+        <span style="text-transform: capitalize;" *ngIf="!noLocat">{{ locat }}</span>
+        <span color="dark" *ngIf="noLocat" style="color: #222;">{{ locat }}</span>
+        <ion-icon name="pin" item-end style="margin-right: -0%;"></ion-icon>
+      </ion-button>
+      <ion-button mode="ios" (click)="searchCriteria('Prix')" block outline class="btn">
+        <span *ngIf="!noPrix">{{ prix }}</span>
+        <span color="dark" *ngIf="noPrix" style="color: #222;">{{ prix }}</span>
+        <ion-icon name="cash" item-end style="margin-right: -0%;"></ion-icon>
+      </ion-button>
+      <ion-button mode="ios" (click)="searchImmo('Meuble')" color="secondary" block class="btn_2">
+        <ion-icon slot="start" name="search" style="zoom: 1.0; margin: 2%"></ion-icon>
+        <span style="text-transform: capitalize;">{{ 'SEARCH' | translate }}</span>
+      </ion-button>
+    </ion-list>
+    <ion-list *ngSwitchCase="'addMeuble'">
+      <div class="box flex center" >
+        <p>
+          <span class="center">
+        <h2>{{ 'MEUBLE' | translate }}</h2>
+        <span (click)="addLocation('Meuble')" [innerHTML]="textAddMeuble"></span>
+        </span>
+        </p>
+      </div>
+    </ion-list>
+  </div>
+
+</ion-content>

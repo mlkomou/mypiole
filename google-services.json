@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "495524063642",
+    "firebase_url": "https://mypiole-2c9d5.firebaseio.com",
+    "project_id": "mypiole-2c9d5",
+    "storage_bucket": "mypiole-2c9d5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:495524063642:android:5472a26ee2ede521163223",
+        "android_client_info": {
+          "package_name": "com.apps.mypiole"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "495524063642-otc6ne1jfrbrkvqu2n8ccvmio7ermbuf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqGo51VllLaJA4N1XeCaDEfsu7YQxEn1I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "495524063642-otc6ne1jfrbrkvqu2n8ccvmio7ermbuf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

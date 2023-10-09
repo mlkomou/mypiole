@@ -1,0 +1,28 @@
+
+<ion-content>
+  <div class="login" style="margin-top: 20%;">
+    <form [formGroup]="loginForm" (submit) = "login(loginForm.value)" novalidate>
+      <span style="font-size: 21px">{{ 'TXT.CONN' | translate }}</span><br><br><br>
+      <ion-input inputmode="text" mode="ios" placeholder="Email | Username"  formControlName="username_email"></ion-input>
+      <ion-input type="password" mode="ios" [placeholder]="'TXT.PASS' | translate" formControlName="password"></ion-input>
+      <span style="color: red; font-size: 14px">{{retMsg}}</span>
+      <ion-button  type="submit"  mode="ios" fill="outline" block class="btn_2" [disabled]="!loginForm.valid">
+        <span style="text-transform: capitalize;">&nbsp;{{ 'TXT.CONN' | translate }}</span>
+      </ion-button>
+      <p style="font-size: 14px">{{ 'Q_FORGET_PASS' | translate }} <a (click)="forget()" class="no_link">{{ 'CLICK_HERE' | translate }}</a></p>
+      <br><br>
+    </form>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-title>
+      <ion-row>
+        <ion-col class="center">
+          {{ 'TXT.NO_CONN' | translate }} <a (click)="signup()" class="no_link">{{ 'TXT.INSCRP' | translate }}</a>
+        </ion-col>
+      </ion-row>
+    </ion-title>
+  </ion-toolbar>
+</ion-footer>

@@ -1,20 +1,27 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+  <div>
+    <h1 class="slide-title">MyPiole</h1>
+    <p class="slide-desc">{{ 'HOME.DESC1' | translate }}</p>
+    <div class="slide-next">
+      <ion-item (click)="goto('location', 'Locat')" color="light" style="opacity: 0.9">
+        <ion-icon  style="zoom: 1" name="home" slot="start"></ion-icon> <span style="font-size: 18px">{{ "LOCAT" | translate }}</span>
+      </ion-item>
+      <ion-item (click)="goto('location', 'Coloc')" color="light" style="opacity: 0.7">
+        <ion-icon style="zoom: 1" name="people" slot="start"></ion-icon>  <span style="font-size: 18px">{{ "COLOC" | translate }}</span>
+      </ion-item>
+      <ion-item (click)="goto('location', 'Terrain')" color="light" style="opacity: 0.9">
+        <ion-icon style="zoom: 1" name="expand" slot="start"></ion-icon>  <span style="font-size: 18px">{{ "TERRAIN" | translate }}</span>
+      </ion-item>
+      <ion-item (click)="goto('location', 'Hotel')" color="light" style="opacity: 0.7">
+        <ion-icon style="zoom: 1" name="star" slot="start"></ion-icon>  <span style="font-size: 18px">{{ "HOTEL" | translate }}</span>
+      </ion-item>
+      <ion-item (click)="goto('location', 'Meuble')" color="light" style="opacity: 0.9">
+        <ion-icon style="zoom: 1" name="key" slot="start"></ion-icon>  <span style="font-size: 18px">{{ "MEUBLE" | translate }}</span>
+      </ion-item>
+      <ion-item (click)="goto('my-immo')" color="light" style="opacity: 0.7">
+        <ion-icon style="zoom: 1" name="man" slot="start"></ion-icon>  <span style="font-size: 18px">{{ "IMMOB" | translate }}</span>
+      </ion-item>
+    </div>
   </div>
 </ion-content>
