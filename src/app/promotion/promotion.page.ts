@@ -64,7 +64,7 @@ export class PromotionPage {
     const modal = await this.modalCtrl.create({
       component: SearchPage,
       componentProps: {
-        value: vl
+        data: vl
       }
     });
     modal.onDidDismiss().then((val: any) => {

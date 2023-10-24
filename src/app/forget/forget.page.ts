@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {TranslateService} from "@ngx-translate/core";
 import {LocalStorageProvider} from "../providers/local-storage/local-storage";
-import {LoadingController, NavController, NavParams} from "@ionic/angular";
+import {LoadingController} from "@ionic/angular";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {DataUsersProvider} from "../providers/data-users/data-users";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-forget',
@@ -13,10 +14,9 @@ import {DataUsersProvider} from "../providers/data-users/data-users";
 export class ForgetPage implements OnInit {
 
   load = false;
-  loader: any;
   retMsg: any = '';
   public forgetForm: FormGroup;
-  constructor(public translate: TranslateService, public local: LocalStorageProvider, public navCtrl: NavController, private formBuilder: FormBuilder, public navParams: NavParams, public dataUser: DataUsersProvider, public loadingCtrl: LoadingController) {
+  constructor(public translate: TranslateService, public local: LocalStorageProvider, public navCtrl: Router, private formBuilder: FormBuilder, public dataUser: DataUsersProvider, public loadingCtrl: LoadingController) {
     this.forgetForm = this.formBuilder.group({
       username_email: ['', Validators.required]
     });
@@ -27,16 +27,16 @@ export class ForgetPage implements OnInit {
   }
 
   login() {
-    this.navCtrl.navigateForward('login');
+    this.navCtrl.navigate(['login']);
   }
 
-  forget(valForm) {
+  async forget(valForm) {
     this.retMsg = '';
     // console.log(valForm);
-    this.loader =  this.loadingCtrl.create({
-      // content: this.translate.instant('TXT.LOADING_CONN')
+    const loader = await this.loadingCtrl.create({
+      message: this.translate.instant('TXT.LOADING_CONN')
     });
-    this.loader.present();
+    await loader.present();
     let browserLang = this.translate.getBrowserLang();
     let val = {
       'username_email': this.forgetForm.value.username_email,
@@ -50,7 +50,7 @@ export class ForgetPage implements OnInit {
           this.retMsg = this.translate.instant('TXT.INCORRECT_EMAIL');
         } else {
           if (next === true) {
-            this.navCtrl.navigateRoot('login');
+            this.navCtrl.navigate(['login']);
           } else {
             console.log("Noooooooo");
             this.retMsg = this.translate.instant('MSG.ERROR_SEND_MAIL');
@@ -60,10 +60,10 @@ export class ForgetPage implements OnInit {
       error => {
         console.log(error);
         this.load = true;
-        this.loader.dismiss();
+        loader.dismiss();
       }, () => {
         this.load = true;
-        this.loader.dismiss();
+        loader.dismiss();
         console.log('Complete!');
       }
     );

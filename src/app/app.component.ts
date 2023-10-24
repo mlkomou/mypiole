@@ -4,6 +4,7 @@ import {TranslateService} from "@ngx-translate/core";
 import {Network} from "@awesome-cordova-plugins/network/ngx";
 import {NetworkProvider} from "./providers/network/network";
 import {SplashPage} from "./splash/splash.page";
+import {StatusBar, Style} from "@capacitor/status-bar";
 
 @Component({
   selector: 'app-root',
@@ -27,6 +28,8 @@ export class AppComponent {
     platform.ready().then(() => {
       // statusBar.backgroundColorByHexString("#212121");
       // statusBar.styleLightContent();
+      StatusBar.setStyle({ style: Style.Light });
+      StatusBar.setBackgroundColor({ color: '#FFFFFF'});
       translate.addLangs(["en", "fr", "es", "ar"]);
       translate.setDefaultLang('en');
 

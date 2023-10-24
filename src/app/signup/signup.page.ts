@@ -20,7 +20,6 @@ export class SignupPage {
   load = false;
   badEmail = false;
   badPhone = false;
-  loader: any;
   retMsg: any = '';
   existUser: any = '';
   existPhone: any = '';
@@ -83,12 +82,12 @@ export class SignupPage {
     console.log('ionViewDidLoad SignupPage');
   }
 
-  signup(valForm) {
+  async signup(valForm) {
     this.notCode = '';
     if (!this.isUser) {
       console.log(valForm.code);
       console.log(this.code);
-      if (valForm.code !== this.code+'') {
+      if (valForm.code !== this.code + '') {
         this.notCode = this.translate.instant('TXT.NOT_VALID_CODE');
         return;
       }
@@ -99,10 +98,10 @@ export class SignupPage {
     this.existEmail = '';
     valForm.adress = valForm.adress ? 'Agent' : 'Client';
     console.log(valForm);
-    this.loader =  this.loadingCtrl.create({
+    const loader = await this.loadingCtrl.create({
       message: this.translate.instant('TXT.LOADING_INSCRP')
     });
-    this.loader.present();
+    await loader.present();
     this.dataUser.addUser(valForm).subscribe(
       async next => {
         console.log(next);
@@ -155,10 +154,10 @@ export class SignupPage {
       error => {
         console.log(error);
         this.load = true;
-        this.loader.dismiss();
+        loader.dismiss();
       }, () => {
         this.load = true;
-        this.loader.dismiss();
+        loader.dismiss();
         console.log('Complete!');
       }
     );
@@ -235,16 +234,16 @@ export class SignupPage {
     });
   }
 
-  validEmail() {
+  async validEmail() {
     this.noEmailValid = '';
     this.retMsg = '';
     this.existUser = '';
     this.existPhone = '';
     this.existEmail = '';
-    this.loader =  this.loadingCtrl.create({
+    const loader = await this.loadingCtrl.create({
       message: 'Email Valiadtion'
     });
-    this.loader.present();
+    await loader.present();
     console.log('hello');
     let min = 1000;
     let max = 9999;
@@ -252,7 +251,11 @@ export class SignupPage {
     console.log(this.code);
 
     let browserLang = this.translate.getBrowserLang();
-    this.dataUser.sendCode({'code': this.code, 'lang': browserLang.match(/en|fr|es|ar/) ? browserLang : 'en', 'email': this.signupForm.value.email}).subscribe(
+    this.dataUser.sendCode({
+      'code': this.code,
+      'lang': browserLang.match(/en|fr|es|ar/) ? browserLang : 'en',
+      'email': this.signupForm.value.email
+    }).subscribe(
       next => {
         console.log(next);
         this.displ1 = false;
@@ -261,9 +264,9 @@ export class SignupPage {
       error => {
         console.log(error);
         this.noEmailValid = 'Verifiez votre email, le mail n\'a pas été envoyé.';
-        this.loader.dismiss();
+        loader.dismiss();
       }, () => {
-        this.loader.dismiss();
+        loader.dismiss();
         console.log('Complete!');
       }
     );

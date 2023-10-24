@@ -1,14 +1,14 @@
 
 <ion-content>
-  <div class="login" style="margin-top: 20%;">
+  <div class="login" style="margin-top: 20%; padding: 15px;">
     <form [formGroup]="forgetForm" (submit) = "forget(forgetForm.value)" novalidate>
       <span style="font-size: 21px">{{ 'FORGET_PASS' | translate }}</span><br>
       <span style="font-size: 14px">{{ 'TITLE_SEND_MAIL' | translate }}</span><br><br><br>
       <ion-input inputmode="text" mode="ios" placeholder="Email | Username"  formControlName="username_email"></ion-input>
       <span style="color: red; font-size: 14px">{{retMsg}}</span>
-      <button  type="submit" ion-button mode="ios" outline block class="btn_2" [disabled]="!forgetForm.valid">
+      <ion-button  type="submit"  mode="ios" fill="outline" expand="block" class="btn_2" [disabled]="!forgetForm.valid">
         <span style="text-transform: capitalize;">&nbsp;{{ 'GEN_PASS' | translate }}</span>
-      </button>
+      </ion-button>
       <br><br>
       <p style="font-size: 16px">{{ 'Q_GEN_PASS' | translate }} <a (click)="login()" class="no_link">{{ 'CONN_U' | translate }}</a></p>
       <br><br>
