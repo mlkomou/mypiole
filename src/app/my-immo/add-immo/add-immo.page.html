@@ -190,16 +190,20 @@
         </ion-button>
       </ion-item>
       <ion-item class="item" *ngIf="!prop">
-        <h5 margin-bottom="50">{{ 'PLH.DESC' | translate }} </h5>
+        <h5 margin-bottom="50">{{ 'PLH.PHOTO' | translate }} </h5>
         <div *ngIf="medias.length != 0" margin-top="50">
 
-          <swiper>
-            <ng-template swiperSlide *ngFor="let m of medias; let i = index">
-              <div class="mainContent"  (click)="setCurrentMedia(m, i)">
-                <img style="max-height: 250px; width: 100%" [src]="m">
-              </div>
-            </ng-template>
-          </swiper>
+          <div *ngFor="let m of medias; let i = index">
+            <div class="mainContent"  (click)="setCurrentMedia(m, i)">
+              <img style="max-height: 250px; width: 100%" [src]="m" alt="">
+            </div>
+          </div>
+
+<!--          <swiper>-->
+<!--            <ng-template swiperSlide *ngFor="let m of medias; let i = index">-->
+<!--             -->
+<!--            </ng-template>-->
+<!--          </swiper>-->
 
 
           <div padding *ngIf="currentMedia != null"
